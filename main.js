@@ -1,6 +1,6 @@
 $(document).ready(function() {
 //   var xhr = $.get(
-//     "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=CDZiYc0d5PBee4RaiaMofOQVd2bIC4ZK=10"
+//     "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=CDZiYc0d5PBee4RaiaMofOQVd2bIC4ZK&limit=10"
 //   );
 //   xhr.done(function(response) {
 //     console.log("success got data", response);
@@ -21,10 +21,10 @@ $(document).ready(function() {
     "Chris Paul"
   ];
 
-  const buttonCreator = function(ballers) {
+  const buttonCreator = function(myArray) {
       
-    for (let i = 0; i < ballers.length; i++) {
-        $("#buttons").append(`<button id="btn-ballers">${ballers[i]}
+    for (let i = 0; i < myArray.length; i++) {
+        $("#buttons").append(`<button id="btn-ballers">${myArray[i]}
         </button>`);
         };
     };
@@ -35,14 +35,14 @@ $(document).ready(function() {
     $('#images').empty()
     const ballersName = this.innerText;
     const request = 
-    `http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=CDZiYc0d5PBee4RaiaMofOQVd2bIC4ZK=10`;
+    `http://api.giphy.com/v1/gifs/search?q=${ballersName}&api_key=CDZiYc0d5PBee4RaiaMofOQVd2bIC4ZK&limit=10`;
     console.log(ballersName);
     
     $.get(request)
         .done(function(response) {
             console.log(response.data)
             response.data.forEach(item => {
-                $('#images').append(`<div><img src =${item.images.original.url}/></div>`)
+                $('#images').append(`<div><img src =${item.images.fixed_height_small.url} data-still= ${item.images}/></div>`)
     });
     });
 });
